@@ -29,6 +29,9 @@ fhe_context.bin
 # This folder is for local development only
 source/
 
+# Temporary editing files (EXCLUDED - decrypted for Copilot editing)
+temp_edit/
+
 # Deployment packages (EXCLUDED - generated)
 deploy/
 
