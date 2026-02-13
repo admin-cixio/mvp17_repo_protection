@@ -15,20 +15,28 @@ env/
 ENV/
 .venv/
 
+# ===================================
+# SECURITY: NEVER COMMIT THESE
+# ===================================
+
 # Keys (NEVER commit keys!)
 keys/
 *.pem
 *.key
 fhe_context.bin
 
-# Source code (KEEP PRIVATE - unencrypted)
+# Source code (EXCLUDED - unencrypted, keep private)
+# This folder is for local development only
 source/
 
-# Deployment packages (generated)
+# Deployment packages (EXCLUDED - generated)
 deploy/
 
-# Encrypted files (SAFE TO COMMIT - these should be tracked)
-# encrypted/ is NOT ignored - commit this for production!
+# ===================================
+# SAFE TO COMMIT (Encrypted)
+# ===================================
+# encrypted/ is NOT ignored - this is your production code!
+# All code in encrypted/ is AES-256-GCM encrypted and safe to commit
 
 # IDE
 .vscode/

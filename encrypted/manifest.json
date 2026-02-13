@@ -12,7 +12,7 @@
   "web_app.py": {
     "original": "source\\web_app.py",
     "encrypted": "encrypted\\web_app.py.enc",
-    "size": 5439
+    "size": 5645
   },
   "crypto\\fhe_engine.py": {
     "original": "source\\crypto\\fhe_engine.py",
@@ -68,6 +68,11 @@
     "original": "source\\utils\\__init__.py",
     "encrypted": "encrypted\\utils\\__init__.py.enc",
     "size": 168
+  },
+  "__pycache__\\web_app.cpython-314.pyc": {
+    "original": "source\\__pycache__\\web_app.cpython-314.pyc",
+    "encrypted": "encrypted\\__pycache__\\web_app.cpython-314.pyc.enc",
+    "size": 8069
   },
   "utils\\__pycache__\\file_scanner.cpython-314.pyc": {
     "original": "source\\utils\\__pycache__\\file_scanner.cpython-314.pyc",
