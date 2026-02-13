@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FHE Demo - MVP17</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .result-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .result-box.show {
+            display: block;
+        }
+        
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .result-item strong {
+            color: #667eea;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #667eea;
+            font-size: 1.1em;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Fully Homomorphic Encryption Demo</h1>
+            <p>Perform computations on ENCRYPTED data without decryption!</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>Run FHE Operation</h2>
+            
+            <div class="input-group">
+                <label for="data-input">Input Data (comma-separated numbers):</label>
+                <input type="text" id="data-input" value="1, 2, 3, 4, 5" placeholder="1, 2, 3, 4, 5">
+            </div>
+            
+            <div class="input-group">
+                <label for="operation">Select Operation:</label>
+                <select id="operation">
+                    <option value="sum">Sum (Add all encrypted numbers)</option>
+                    <option value="mean">Mean (Average of encrypted numbers)</option>
+                </select>
+            </div>
+            
+            <button class="btn btn-primary" onclick="runFHE()">🚀 Run FHE Operation</button>
+            <a href="/" class="btn btn-secondary" style="margin-left: 10px;">🏠 Back to Home</a>
+            
+            <div id="loading" class="loading" style="display: none;">
+                ⏳ Computing on encrypted data...
+            </div>
+            
+            <div id="result" class="result-box">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📊 Results</h3>
+                
+                <div class="result-item">
+                    <strong>Operation:</strong> <span id="result-operation"></span>
+                </div>
+                
+                <div class="result-item">
+                    <strong>Input Data:</strong> <span id="result-input"></span>
+                </div>
+                
+                <div class="result-item">
+                    <strong>Result (from encrypted computation):</strong> 
+                    <span id="result-value" style="font-size: 1.5em; color: #667eea;"></span>
+                </div>
+                
+                <div class="result-item">
+                    <strong>Expected (for verification):</strong> 
+                    <span id="result-expected"></span>
+                </div>
+                
+                <div class="success-message" id="success-message"></div>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>How It Works</h2>
+            <ol style="color: #666; line-height: 1.8;">
+                <li>Your data is <strong>encrypted</strong> using Fully Homomorphic Encryption</li>
+                <li>Operations are performed directly on the <strong>encrypted data</strong></li>
+                <li>Data is <strong>NEVER decrypted</strong> during computation</li>
+                <li>Only the final result is decrypted</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script>
+        function runFHE() {
+            const dataInput = document.getElementById('data-input').value;
+            const operation = document.getElementById('operation').value;
+            
+            // Parse input data
+            const data = dataInput.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+            
+            if (data.length === 0) {
+                alert('Please enter valid numbers!');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result').classList.remove('show');
+            
+            // Call API
+            fetch('/api/fhe-demo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    operation: operation,
+                    data: data
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+                
+                // Display results
+                document.getElementById('result-operation').textContent = data.operation.toUpperCase();
+                document.getElementById('result-input').textContent = JSON.stringify(data.input_data);
+                document.getElementById('result-value').textContent = data.result;
+                document.getElementById('result-expected').textContent = data.expected;
+                document.getElementById('success-message').textContent = '✅ ' + data.message;
+                
+                document.getElementById('result').classList.add('show');
+            })
+            .catch(error => {
+                document.getElementById('loading').style.display = 'none';
+                alert('Error: ' + error);
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

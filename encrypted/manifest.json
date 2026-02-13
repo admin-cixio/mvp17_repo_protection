@@ -1,0 +1,161 @@
+{
+  "encrypted_files": [
+    {
+      "original_path": "ARCHITECTURE.md",
+      "encrypted_path": "encrypted\\ARCHITECTURE.md.enc",
+      "size": 9862,
+      "encrypted_size": 9894,
+      "status": "success"
+    },
+    {
+      "original_path": "COMPLETE.md",
+      "encrypted_path": "encrypted\\COMPLETE.md.enc",
+      "size": 12516,
+      "encrypted_size": 12548,
+      "status": "success"
+    },
+    {
+      "original_path": "hello_world.py",
+      "encrypted_path": "encrypted\\hello_world.py.enc",
+      "size": 1735,
+      "encrypted_size": 1767,
+      "status": "success"
+    },
+    {
+      "original_path": "HOW_TO_RUN.md",
+      "encrypted_path": "encrypted\\HOW_TO_RUN.md.enc",
+      "size": 2034,
+      "encrypted_size": 2066,
+      "status": "success"
+    },
+    {
+      "original_path": "main.py",
+      "encrypted_path": "encrypted\\main.py.enc",
+      "size": 11432,
+      "encrypted_size": 11464,
+      "status": "success"
+    },
+    {
+      "original_path": "PROJECT_SUMMARY.md",
+      "encrypted_path": "encrypted\\PROJECT_SUMMARY.md.enc",
+      "size": 11661,
+      "encrypted_size": 11693,
+      "status": "success"
+    },
+    {
+      "original_path": "QUICKSTART.md",
+      "encrypted_path": "encrypted\\QUICKSTART.md.enc",
+      "size": 4518,
+      "encrypted_size": 4550,
+      "status": "success"
+    },
+    {
+      "original_path": "README.md",
+      "encrypted_path": "encrypted\\README.md.enc",
+      "size": 3299,
+      "encrypted_size": 3331,
+      "status": "success"
+    },
+    {
+      "original_path": "requirements.txt",
+      "encrypted_path": "encrypted\\requirements.txt.enc",
+      "size": 394,
+      "encrypted_size": 426,
+      "status": "success"
+    },
+    {
+      "original_path": "USER_GUIDE.md",
+      "encrypted_path": "encrypted\\USER_GUIDE.md.enc",
+      "size": 9436,
+      "encrypted_size": 9468,
+      "status": "success"
+    },
+    {
+      "original_path": "WORKSPACE_ADDED.md",
+      "encrypted_path": "encrypted\\WORKSPACE_ADDED.md.enc",
+      "size": 2911,
+      "encrypted_size": 2943,
+      "status": "success"
+    },
+    {
+      "original_path": "crypto\\fhe_engine.py",
+      "encrypted_path": "encrypted\\crypto\\fhe_engine.py.enc",
+      "size": 12981,
+      "encrypted_size": 13013,
+      "status": "success"
+    },
+    {
+      "original_path": "crypto\\file_encryptor.py",
+      "encrypted_path": "encrypted\\crypto\\file_encryptor.py.enc",
+      "size": 9775,
+      "encrypted_size": 9807,
+      "status": "success"
+    },
+    {
+      "original_path": "crypto\\key_manager.py",
+      "encrypted_path": "encrypted\\crypto\\key_manager.py.enc",
+      "size": 7346,
+      "encrypted_size": 7378,
+      "status": "success"
+    },
+    {
+      "original_path": "crypto\\__init__.py",
+      "encrypted_path": "encrypted\\crypto\\__init__.py.enc",
+      "size": 224,
+      "encrypted_size": 256,
+      "status": "success"
+    },
+    {
+      "original_path": "examples\\copilot_demo.py",
+      "encrypted_path": "encrypted\\examples\\copilot_demo.py.enc",
+      "size": 7381,
+      "encrypted_size": 7413,
+      "status": "success"
+    },
+    {
+      "original_path": "examples\\encrypted_compute.py",
+      "encrypted_path": "encrypted\\examples\\encrypted_compute.py.enc",
+      "size": 6898,
+      "encrypted_size": 6930,
+      "status": "success"
+    },
+    {
+      "original_path": "examples\\encrypted_search.py",
+      "encrypted_path": "encrypted\\examples\\encrypted_search.py.enc",
+      "size": 2224,
+      "encrypted_size": 2256,
+      "status": "success"
+    },
+    {
+      "original_path": "examples\\__init__.py",
+      "encrypted_path": "encrypted\\examples\\__init__.py.enc",
+      "size": 96,
+      "encrypted_size": 128,
+      "status": "success"
+    },
+    {
+      "original_path": "utils\\file_scanner.py",
+      "encrypted_path": "encrypted\\utils\\file_scanner.py.enc",
+      "size": 4841,
+      "encrypted_size": 4873,
+      "status": "success"
+    },
+    {
+      "original_path": "utils\\repoignore.py",
+      "encrypted_path": "encrypted\\utils\\repoignore.py.enc",
+      "size": 5237,
+      "encrypted_size": 5269,
+      "status": "success"
+    },
+    {
+      "original_path": "utils\\__init__.py",
+      "encrypted_path": "encrypted\\utils\\__init__.py.enc",
+      "size": 168,
+      "encrypted_size": 200,
+      "status": "success"
+    }
+  ],
+  "total_files": 22,
+  "success_count": 22,
+  "error_count": 0
+}

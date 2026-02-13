@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MVP17</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .files-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .file-item {
+            background: #f8f9fa;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-item:hover {
+            background: #e9ecef;
+        }
+        
+        .file-name {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .file-size {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        .search-box {
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            width: 70%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .search-results {
+            margin-top: 15px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .search-results.show {
+            display: block;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #667eea;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Repository Dashboard</h1>
+            <p>View and search encrypted files</p>
+        </div>
+        
+        <div class="section">
+            <h2>🔍 Search Encrypted Files</h2>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Enter keyword to search..." />
+                <button class="btn btn-primary" onclick="searchFiles()" style="margin-left: 10px;">Search</button>
+            </div>
+            
+            <div id="search-loading" class="loading" style="display: none;">
+                Searching encrypted files...
+            </div>
+            
+            <div id="search-results" class="search-results">
+                <h3 style="margin-bottom: 10px;">Search Results:</h3>
+                <div id="search-results-content"></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📁 Encrypted Files</h2>
+            <div id="files-loading" class="loading">Loading files...</div>
+            <div id="files-list" class="files-list" style="display: none;"></div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/" class="btn btn-secondary">🏠 Back to Home</a>
+            <a href="/demo" class="btn btn-primary" style="margin-left: 10px;">🔬 FHE Demo</a>
+        </div>
+    </div>
+    
+    <script>
+        // Load encrypted files
+        fetch('/api/encrypted-files')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('files-loading').style.display = 'none';
+                document.getElementById('files-list').style.display = 'block';
+                
+                const filesList = document.getElementById('files-list');
+                
+                if (data.files && data.files.length > 0) {
+                    data.files.forEach(file => {
+                        const fileItem = document.createElement('div');
+                        fileItem.className = 'file-item';
+                        fileItem.innerHTML = `
+                            <span class="file-name">📄 ${file.path}</span>
+                            <span class="file-size">${(file.size / 1024).toFixed(2)} KB</span>
+                        `;
+                        filesList.appendChild(fileItem);
+                    });
+                } else {
+                    filesList.innerHTML = '<p style="text-align: center; color: #999;">No encrypted files found</p>';
+                }
+            })
+            .catch(error => {
+                document.getElementById('files-loading').textContent = '❌ Error loading files';
+                console.error('Error:', error);
+            });
+        
+        // Search function
+        function searchFiles() {
+            const keyword = document.getElementById('search-input').value.trim();
+            
+            if (!keyword) {
+                alert('Please enter a keyword!');
+                return;
+            }
+            
+            document.getElementById('search-loading').style.display = 'block';
+            document.getElementById('search-results').classList.remove('show');
+            
+            fetch('/api/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ keyword: keyword }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('search-loading').style.display = 'none';
+                
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+                
+                const resultsContent = document.getElementById('search-results-content');
+                
+                if (data.matches && data.matches.length > 0) {
+                    resultsContent.innerHTML = `
+                        <p><strong>Found ${data.count} matches for "${data.keyword}":</strong></p>
+                        <ul style="margin-top: 10px;">
+                            ${data.matches.map(match => `<li>📄 ${match.file}</li>`).join('')}
+                        </ul>
+                    `;
+                } else {
+                    resultsContent.innerHTML = `<p>No matches found for "${data.keyword}"</p>`;
+                }
+                
+                document.getElementById('search-results').classList.add('show');
+            })
+            .catch(error => {
+                document.getElementById('search-loading').style.display = 'none';
+                alert('Error: ' + error);
+                console.error('Error:', error);
+            });
+        }
+        
+        // Allow Enter key to search
+        document.getElementById('search-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchFiles();
+            }
+        });
+    </script>
+</body>
+</html>
