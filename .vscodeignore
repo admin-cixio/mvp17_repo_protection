@@ -1,0 +1,40 @@
+# VS Code Ignore File
+# These files/folders are excluded from VS Code indexing and GitHub Copilot
+
+# Exclude unencrypted source code
+source/
+source/**
+
+# Exclude private keys
+keys/
+keys/**
+
+# Exclude deployment packages
+deploy/
+deploy/**
+
+# Exclude Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Exclude virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Exclude temporary files
+*.tmp
+*.temp
+.temp/
+temp/
+
+# What VS Code and Copilot SHOULD see:
+# ✅ encrypted/        - Encrypted source code
+# ✅ templates/        - Web templates
+# ✅ *.md             - Documentation
+# ✅ run_*.py         - Launcher scripts
+# ✅ manage_*.py      - Management scripts
