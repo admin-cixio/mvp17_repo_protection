@@ -248,19 +248,19 @@ class FHEEngine:
             encrypted_vector: Encrypted vector
             
         Returns:
-            Encrypted sum
+            Encrypted sum (as single-element vector)
         """
-        # Tree-based summation for efficiency
-        result = encrypted_vector
-        size = len(encrypted_vector.encrypted_data)
+        # Simply sum all encrypted values directly
+        # This works because addition is homomorphic
+        encrypted_sum = np.sum(encrypted_vector.encrypted_data)
+        noise_sum = np.sum(encrypted_vector.noise)
         
-        step = 1
-        while step < size:
-            rotated = result.rotate(step)
-            result = result + rotated
-            step *= 2
-        
-        return result
+        # Return as single-element vector
+        return SimpleFHEVector(
+            np.array([encrypted_sum]),
+            np.array([noise_sum]),
+            encrypted_vector.scale
+        )
     
     def mean_encrypted(self, encrypted_vector: SimpleFHEVector) -> SimpleFHEVector:
         """
@@ -270,11 +270,20 @@ class FHEEngine:
             encrypted_vector: Encrypted vector
             
         Returns:
-            Encrypted mean
+            Encrypted mean (as single-element vector)
         """
         size = len(encrypted_vector.encrypted_data)
         sum_result = self.sum_encrypted(encrypted_vector)
-        return sum_result * (1.0 / size)
+        
+        # Divide the encrypted sum by size (scalar multiplication)
+        mean_encrypted_data = sum_result.encrypted_data / size
+        mean_noise = sum_result.noise / size
+        
+        return SimpleFHEVector(
+            mean_encrypted_data,
+            mean_noise,
+            sum_result.scale
+        )
     
     def polynomial_eval_encrypted(self,
                                   encrypted_vector: SimpleFHEVector,
