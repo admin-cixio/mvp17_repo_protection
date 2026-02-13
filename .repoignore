@@ -9,6 +9,12 @@ keys/
 # Exclude encrypted directory
 encrypted/
 
+# Exclude source directory (we only encrypt from source/ to encrypted/)
+source/
+
+# Exclude launcher scripts
+run_encrypted_webapp.py
+
 # Exclude Python cache and virtual environments
 __pycache__/
 *.py[cod]
