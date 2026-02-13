@@ -1,0 +1,25 @@
+# Python dependencies for MVP17 Repository Protection
+
+# Core cryptography
+cryptography>=41.0.0
+pycryptodome>=3.19.0
+
+# Fully Homomorphic Encryption
+tenseal>=0.3.14
+
+# CLI and utilities
+click>=8.1.0
+rich>=13.7.0
+colorama>=0.4.6
+
+# File handling
+pathspec>=0.12.0
+watchdog>=3.0.0
+
+# Data processing
+numpy>=1.24.0
+
+# Development
+pytest>=7.4.0
+black>=23.12.0
+flake8>=7.0.0

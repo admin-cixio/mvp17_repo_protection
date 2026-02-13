@@ -1,0 +1,64 @@
+# Repository Protection Ignore File
+# Similar to .gitignore - files/folders matching these patterns won't be encrypted
+
+# Exclude keys directory (never encrypt your keys!)
+keys/
+*.pem
+*.key
+
+# Exclude encrypted directory
+encrypted/
+
+# Exclude Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Exclude configuration
+.repoignore
+.gitignore
+.git/
+
+# Exclude IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Exclude build artifacts
+build/
+dist/
+*.egg-info/
+
+# Exclude logs
+*.log
+logs/
+
+# Exclude large binary files
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.dat
+
+# Exclude media files (optional)
+*.mp4
+*.avi
+*.mov
+*.mp3
+*.wav
+
+# Exclude documentation (optional - comment if you want to encrypt docs)
+# *.md
+# *.txt
+
+# Exclude test data
+test_data/
+*.test
